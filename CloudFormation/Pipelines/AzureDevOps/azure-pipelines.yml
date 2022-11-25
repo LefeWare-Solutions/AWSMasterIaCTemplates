@@ -1,0 +1,27 @@
+name: $(major).$(minor).$(Rev:r)
+
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - CloudFormation/Templates*
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  location: 'eastus'
+  major: 1
+  minor: 0
+
+- task: S3Upload@1
+  inputs:
+    awsCredentials: 'AWS'
+    regionName: 'eu-west-1'
+    bucketName: ''
+    sourceFolder: 'source'
+    globExpressions: '**'
+    targetFolder: 'AWSCommunityBuilders'
+    createBucket: true
