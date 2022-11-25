@@ -12,16 +12,23 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  location: 'eastus'
+  location: 'eastus-2'
   major: 1
   minor: 0
 
-- task: S3Upload@1
-  inputs:
-    awsCredentials: 'AWS'
-    regionName: 'eu-west-1'
-    bucketName: ''
-    sourceFolder: 'source'
-    globExpressions: '**'
-    targetFolder: 'AWSCommunityBuilders'
-    createBucket: true
+stages:
+- stage: Publish
+  displayName: Publish Templates to S3
+  jobs:
+  - job: Publish
+    displayName: Publish Templates to S3
+    steps:
+      - task: S3Upload@1
+        inputs:
+          awsCredentials: 'AWS'
+          regionName: $(location)
+          bucketName: 'lws-eus2-d-cftemplates-s3'
+          sourceFolder: ' $(Build.ArtifactStagingDirectory)/CloudFormation'
+          globExpressions: '**'
+          targetFolder: 'AWSCommunityBuilders'
+          createBucket: true
