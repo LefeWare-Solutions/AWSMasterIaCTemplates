@@ -33,5 +33,5 @@ Resources:
         Parameters: 
           EnvironmentName : !Ref 'EnvironmentName'
           VpcCIDR : !Ref VPCCIDR
-          VPCName : !Join [ "", [ "lws-", !Ref EnvironmentName, "-", !Ref LocationShortForm, "-global-vpc" ] ]
+          VPCName : !Sub "lws-${EnvironmentName}-${LocationShortForm}-global-vpc"
         TemplateURL: !Join [ "", [ !Ref S3BucketBaseUrl, !Ref TemplateVersion, "/VPC/vpc.yaml" ] ]
