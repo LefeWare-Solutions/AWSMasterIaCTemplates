@@ -25,7 +25,6 @@ Parameters:
   VPCName:
     Description: Please enter the IP range (CIDR notation) for this VPC
     Type: String
-    Default: 10.1.0.0/16
   
 Resources:
   NetworkStack:
@@ -34,6 +33,5 @@ Resources:
         Parameters: 
           EnvironmentName : !Ref 'EnvironmentName'
           VpcCIDR : !Ref VPCCIDR
-          VPCName : 'Test123'
+          VPCName : !Join [ "", [ "lws-", !Ref EnvironmentName, "-", !Ref LocationShortForm, "-global-vpc" ] ]
         TemplateURL: !Join [ "", [ !Ref S3BucketBaseUrl, !Ref TemplateVersion, "/VPC/vpc.yaml" ] ]
-        #!Join [ "", [ "lws-", !Ref EnvironmentName, "-", !Ref LocationShortForm, "-global-vpc" ] ]
