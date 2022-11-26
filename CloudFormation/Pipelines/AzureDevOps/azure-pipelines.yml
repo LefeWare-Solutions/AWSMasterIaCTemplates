@@ -28,7 +28,7 @@ stages:
           awsCredentials: 'aws-lws-d-azdevops-serviceconnection'
           regionName: $(location)
           bucketName: 'lws-eus2-d-cftemplates-s3'
-          sourceFolder: ' $(Build.SourcesDirectory)/CloudFormation'
+          sourceFolder: ' $(Build.SourcesDirectory)/CloudFormation/Templates'
           globExpressions: '**'
-          targetFolder: 'AWSMasterIaCTemplates/($build.buildnumber)'
+          targetFolder: 'AWSMasterIaCTemplates/$(Build.BuildNumber)'
           createBucket: true
