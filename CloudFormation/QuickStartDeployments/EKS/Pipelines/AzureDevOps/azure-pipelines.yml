@@ -21,13 +21,13 @@ stages:
   - stage: dev_deploy
     displayName: Deploy Dev
     variables:
-        - template: '$(rootDir)/Variables/dev-variables.yml'
+      - template: '$(rootDir)/Variables/dev-variables.yml'
     jobs:
-    - job: DEV
-      displayName: Deploy Dev
-      environment: 'dev'
-      steps:
-        - template: ./deployment-steps.yml
-          parameters:
-            awsServiceConnection: ${{ variables.awsServiceConnection }}
+      - job: DEV
+        displayName: Deploy Dev
+        environment: 'dev'
+        steps:
+          - template: ./deployment-steps.yml
+            parameters:
+              awsServiceConnection: ${{ variables.awsServiceConnection }}
 
