@@ -10,7 +10,7 @@ steps:
     inputs:
       awsCredentials: ${{ parameters.awsServiceConnection }}
       regionName: $(region)
-      stackName: 'AzureDevOpsDemo'
+      stackName: 'LWSDeployments'
       templateSource: 'file'
       templateFile: '$(rootDir)/EKS/app-stack.yml'
       s3BucketName: 'lws-eus2-d-cftemplates-s3'
