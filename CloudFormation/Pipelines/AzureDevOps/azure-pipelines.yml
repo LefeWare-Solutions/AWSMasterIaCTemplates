@@ -25,10 +25,10 @@ stages:
     steps:
       - task: S3Upload@1
         inputs:
-          awsCredentials: 'AWS'
+          awsCredentials: 'aws-lws-d-azdevops-serviceconnection'
           regionName: $(location)
           bucketName: 'lws-eus2-d-cftemplates-s3'
           sourceFolder: ' $(Build.ArtifactStagingDirectory)/CloudFormation'
           globExpressions: '**'
-          targetFolder: 'AWSCommunityBuilders'
+          targetFolder: 'AWSCommunityBuilders/($build.buildnumber)'
           createBucket: true
