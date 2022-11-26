@@ -29,5 +29,5 @@ stages:
       steps:
         - template: ./deployment-steps.yml
           parameters:
-            azureSubscription: ${{ variables.azureSubscription }}
+            awsServiceConnection: ${{ variables.awsServiceConnection }}
 
