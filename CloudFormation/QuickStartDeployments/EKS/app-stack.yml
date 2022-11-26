@@ -28,7 +28,7 @@ Resources:
       Type: AWS::CloudFormation::Stack
       Properties:
         Parameters: 
-          EnvironmentName : !Ref EnvironmentName
+          EnvironmentName : !Ref 'EnvironmentName'
           VpcCIDR : !Ref VpcCIDR
-          VPCName : !Join [ "", [ "lws-", !Ref Environment, "-", !Ref LocationShortForm, "-global-vpc" ] ]
+          VPCName : !Join [ "", [ "lws-", !Ref EnvironmentName, "-", !Ref LocationShortForm, "-global-vpc" ] ]
         TemplateURL: !Join [ "", [ !Ref S3BucketBaseUrl, !Ref TemplateVersion, "/VPC/vpc.yaml" ] ]

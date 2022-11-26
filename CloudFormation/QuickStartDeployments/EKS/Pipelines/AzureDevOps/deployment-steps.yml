@@ -14,4 +14,4 @@ steps:
       templateSource: 'file'
       templateFile: '$(rootDir)/EKS/app-stack.yml'
       s3BucketName: 'lws-eus2-d-cftemplates-s3'
-      templateParametersFile:  '$(rootDir)/EKS/parameters/parameters.dev.json'
+      templateParametersFile:  '$(rootDir)/EKS/parameters/parameters.$(environment).json'
