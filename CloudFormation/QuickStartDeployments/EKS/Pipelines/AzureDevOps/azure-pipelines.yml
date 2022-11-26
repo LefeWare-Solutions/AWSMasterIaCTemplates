@@ -21,7 +21,7 @@ stages:
   - stage: dev_deploy
     displayName: Deploy Dev
     variables:
-      - template: '$(rootDir)/Variables/dev-variables.yml'
+      - template: '../../../Variables/dev-variables.yml'
     jobs:
       - deployment: 'DEV'
         displayName: 'Deploy Dev'

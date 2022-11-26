@@ -1,7 +1,7 @@
 parameters:
-- name: 'awsServiceConnection'
-  type: string
-  default: false
+  - name: 'awsServiceConnection'
+    type: string
+    default: false
 
 steps:
   - checkout: self
@@ -12,6 +12,6 @@ steps:
       regionName: $(location)
       stackName: 'AzureDevOpsDemo'
       templateSource: 'file'
-      templateFile: '$(Build.SourcesDirectory)/CloudFormation/QuickStartDeployments/EKS/app-stack.yml'
+      templateFile: '$(rootDir)/EKS/app-stack.yml'
       s3BucketName: 'lws-eus2-d-cftemplates-s3'
-      templateParametersFile:  '$(Build.SourcesDirectory)/CloudFormation/QuickStartDeployments/EKS/parameters/parameters.$(environment).json'
+      templateParametersFile:  '$(rootDir)/EKS/parameters/parameters.$(environment).json'
