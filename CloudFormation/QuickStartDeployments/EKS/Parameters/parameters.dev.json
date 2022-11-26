@@ -1,0 +1,18 @@
+[
+  {
+    "ParameterKey": "EnvironmentName",
+    "ParameterValue": "d"
+  },
+  {
+    "ParameterKey": "LocationShortForm",
+    "ParameterValue": "eus2"
+  },
+  {
+    "ParameterKey": "S3BucketBaseUrl",
+    "ParameterValue": "https://lws-eus2-d-cftemplates-s3.s3.us-east-2.amazonaws.com/AWSMasterIaCTemplates/"
+  },
+  {
+    "ParameterKey": "TemplateVersion",
+    "ParameterValue": "1.0.9"
+  }
+]

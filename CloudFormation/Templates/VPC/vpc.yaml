@@ -8,6 +8,10 @@ Parameters:
     Description: An environment name that is prefixed to resource names
     Type: String
 
+  VPCName:
+    Description: An environment name that is prefixed to resource names
+    Type: String
+
   VpcCIDR:
     Description: Please enter the IP range (CIDR notation) for this VPC
     Type: String
@@ -22,7 +26,7 @@ Resources:
       EnableDnsHostnames: true
       Tags:
         - Key: Name
-          Value: DefaultVPC
+          Value: !Ref VPCName
         - Key: Envrionment
           Value: !Ref EnvironmentName
 

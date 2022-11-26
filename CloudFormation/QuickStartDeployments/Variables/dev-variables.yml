@@ -1,0 +1,4 @@
+variables:
+  awsServiceConnection: 'aws-lws-d-azdevops-serviceconnection'
+  environment: 'Dev'
+  environmentShort: 'd'

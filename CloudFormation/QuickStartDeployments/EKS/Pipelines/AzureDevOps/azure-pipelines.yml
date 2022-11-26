@@ -1,0 +1,33 @@
+name: $(major).$(minor).$(Rev:r)
+
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - CloudFormation/QuickStartDeployments/EKS/*
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  location: 'us-east-2'
+  major: 0
+  minor: 0
+  rootDir: '$(Build.SourcesDirectory)/CloudFormation/QuickStartDeployments/'
+
+stages:
+  - stage: dev_deploy
+    displayName: Deploy Dev
+    variables:
+        - template: '$(rootDir)/Variables/dev-variables.yml'
+    jobs:
+    - job: DEV
+      displayName: Deploy Dev
+      environment: 'dev'
+      steps:
+        - template: ./deployment-steps.yml
+          parameters:
+            azureSubscription: ${{ variables.azureSubscription }}
+

@@ -1,0 +1,34 @@
+Description:  The following stack deploys a kubernetes cluster
+
+Parameters:
+  EnvironmentName:
+    Description: An environment name that is prefixed to resource names
+    Type: String
+
+  LocationShortForm:
+    Description: AWS Location Short Form Code
+    Type: String
+
+  S3BucketBaseUrl:
+    Description: Please enter the IP range (CIDR notation) for this VPC
+    Type: String
+
+  TemplateVersion:
+    Description: The current template version to deploy
+    Type: String
+
+  VpcCIDR:
+    Description: Please enter the IP range (CIDR notation) for this VPC
+    Type: String
+    Default: 10.1.0.0/16
+
+  
+Resources:
+  NetworkStack:
+      Type: AWS::CloudFormation::Stack
+      Properties:
+        Parameters: 
+          EnvironmentName : !Ref EnvironmentName
+          VpcCIDR : !Ref VpcCIDR
+          VPCName : !Join [ "", [ "lws-", !Ref Environment, "-" !Ref LocationShortForm, "-global-vpc" ] ]
+        TemplateURL: !Join [ "", [ !Ref S3BucketBaseUrl, !Ref TemplateVersion, "/VPC/vpc.yaml" ] ]

@@ -1,0 +1,17 @@
+parameters:
+- name: 'awsServiceConnection'
+  type: string
+  default: false
+
+steps:
+  - checkout: self
+
+  - task: CloudFormationCreateOrUpdateStack@1
+    inputs:
+      awsCredentials: ${{ parameters.awsServiceConnection }}
+      regionName: $(location)
+      stackName: 'AzureDevOpsDemo'
+      templateSource: 'file'
+      templateFile: '$(Build.SourcesDirectory)/CloudFormation/QuickStartDeployments/EKS/app-stack.yml'
+      s3BucketName: 'lws-eus2-d-cftemplates-s3'
+      templateParametersFile:  '$(Build.SourcesDirectory)/CloudFormation/QuickStartDeployments/EKS/parameters/parameters.$(environment).json'
