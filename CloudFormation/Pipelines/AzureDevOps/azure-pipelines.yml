@@ -12,7 +12,7 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  location: 'eastus-2'
+  location: 'us-east-2'
   major: 1
   minor: 0
 
@@ -28,7 +28,7 @@ stages:
           awsCredentials: 'aws-lws-d-azdevops-serviceconnection'
           regionName: $(location)
           bucketName: 'lws-eus2-d-cftemplates-s3'
-          sourceFolder: ' $(Build.ArtifactStagingDirectory)/CloudFormation'
+          sourceFolder: ' $(Build.SourcesDirectory)/CloudFormation'
           globExpressions: '**'
-          targetFolder: 'AWSCommunityBuilders/($build.buildnumber)'
+          targetFolder: 'AWSMasterIaCTemplates/($build.buildnumber)'
           createBucket: true
