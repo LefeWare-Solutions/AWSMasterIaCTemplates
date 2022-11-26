@@ -24,6 +24,7 @@ Resources:
         - Key: Name
           Value: DefaultVPC
         - Key: Envrionment
+          Value: !Ref EnvironmentName
 
 
   InternetGateway:
