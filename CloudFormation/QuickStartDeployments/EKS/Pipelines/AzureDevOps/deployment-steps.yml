@@ -9,7 +9,7 @@ steps:
   - task: CloudFormationCreateOrUpdateStack@1
     inputs:
       awsCredentials: ${{ parameters.awsServiceConnection }}
-      regionName: $(location)
+      regionName: $(region)
       stackName: 'AzureDevOpsDemo'
       templateSource: 'file'
       templateFile: '$(rootDir)/EKS/app-stack.yml'

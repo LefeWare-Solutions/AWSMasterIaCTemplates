@@ -12,7 +12,7 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  location: 'us-east-2'
+  region: 'us-east-2'
   major: 0
   minor: 0
   rootDir: '$(Build.SourcesDirectory)/CloudFormation/QuickStartDeployments/'
