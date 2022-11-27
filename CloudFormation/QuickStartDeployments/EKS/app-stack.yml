@@ -5,7 +5,7 @@ Parameters:
     Description: An environment name that is prefixed to resource names
     Type: String
 
-  LocationShortForm:
+  RegionShortForm:
     Description: AWS Location Short Form Code
     Type: String
 
@@ -21,17 +21,14 @@ Parameters:
     Description: Please enter the IP range (CIDR notation) for this VPC
     Type: String
     Default: 10.1.0.0/16
-
-  VPCName:
-    Description: Please enter the IP range (CIDR notation) for this VPC
-    Type: String
   
 Resources:
   NetworkStack:
       Type: AWS::CloudFormation::Stack
       Properties:
         Parameters: 
-          EnvironmentName : !Ref 'EnvironmentName'
-          VpcCIDR : !Ref VPCCIDR
-          VPCName : !Sub "lws-${EnvironmentName}-${LocationShortForm}-global-vpc"
+          EnvironmentName : !Ref EnvironmentName
+          RegionShortForm: !Ref RegionShortForm
+          ServiceName: 'eks'
+          VPCCIDR : !Ref VPCCIDR
         TemplateURL: !Join [ "", [ !Ref S3BucketBaseUrl, !Ref TemplateVersion, "/VPC/vpc.yaml" ] ]
