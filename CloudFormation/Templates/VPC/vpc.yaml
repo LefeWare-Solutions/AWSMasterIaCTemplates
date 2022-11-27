@@ -8,11 +8,15 @@ Parameters:
     Description: An environment name that is prefixed to resource names
     Type: String
 
-  VPCName:
-    Description: An environment name that is prefixed to resource names
+  RegionShortForm:
+    Description: The aws region code shortform used for naming conventions
+    Type: String
+  
+  ServiceName:
+    Description: The service name used for naming conventions
     Type: String
 
-  VpcCIDR:
+  VPCCIDR:
     Description: Please enter the IP range (CIDR notation) for this VPC
     Type: String
     Default: 10.1.0.0/16
@@ -26,7 +30,7 @@ Resources:
       EnableDnsHostnames: true
       Tags:
         - Key: Name
-          Value: !Ref VPCName
+          Value: !Join [ "-", [ "lws", !Ref EnvironmentName, !Ref RegionShortForm, !Ref ServiceName, "vpc" ] ] #Custom naming convention
         - Key: Envrionment
           Value: !Ref EnvironmentName
 
