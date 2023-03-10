@@ -1,0 +1,57 @@
+name: $(major).$(minor).$(Rev:r)
+
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - Terraform/Modules/*
+
+variables:
+  major: 1
+  minor: 0
+  regionName: 'eu-west-1'
+
+stages:
+  - stage: build
+    displayName: Build
+    jobs:
+      - job: Build
+        steps:
+          - template: ./build-steps.yml
+
+  - stage: "publish_dev"
+    displayName: Publish Development
+    dependsOn: ["build"]
+    condition: succeeded()
+    variables:
+      - bucketName: 'lws-eus-d-azdevops-terraform-iacmodules'
+    jobs:
+      - deployment: 'Dev Deployment'
+        environment: 'dev'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - template: ./deployment-steps.yml
+                  parameters:
+                    awsServiceConnection: lws-eus-d-azdevops-serviceconnection
+                
+  - stage: "publish_prd"
+    displayName: Publish Production
+    dependsOn: ["publish_dev"]
+    condition: succeeded()
+    variables:
+      - bucketName: 'lws-eus-d-azdevops-terraform-iacmodules'
+    jobs:
+      - deployment: 'Prd Deployment'
+        environment: 'prd'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - template: ./deployment-steps.yml
+                  parameters:
+                    awsServiceConnection: lws-eus-p-azdevops-secviceconnection
+                    

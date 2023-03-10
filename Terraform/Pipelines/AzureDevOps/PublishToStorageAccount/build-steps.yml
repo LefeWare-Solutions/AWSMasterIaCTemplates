@@ -1,0 +1,8 @@
+steps:
+
+  - task: PublishBuildArtifacts@1
+    displayName: Zip & Publish Resource Terrafrom Templates
+    inputs:
+      PathtoPublish: '$(Build.SourcesDirectory)/Terraform/Modules'
+      ArtifactName: 'Templates'
+      publishLocation: 'Container'

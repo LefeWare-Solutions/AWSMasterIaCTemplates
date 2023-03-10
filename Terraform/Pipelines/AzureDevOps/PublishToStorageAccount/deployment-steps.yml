@@ -1,0 +1,19 @@
+parameters:
+  - name: 'awsServiceConnection'
+    type: string
+    default: false
+
+steps:
+  - task: DownloadPipelineArtifact@2
+    inputs:
+      artifact: '$(Build.BuildNumber)'
+      path: $(Build.SourcesDirectory)/bin
+
+  - task: S3Upload@1
+    inputs:
+      awsCredentials: {{ parameters.awsServiceConnection }}
+      regionName: $(regionName)
+      bucketName: '$(bucketName)'
+      sourceFolder: '$(Build.SourcesDirectory)/Modules'
+      targetFolder: 'TerraformIaCModules/$(Build.BuildNumber)'
+      createBucket: true

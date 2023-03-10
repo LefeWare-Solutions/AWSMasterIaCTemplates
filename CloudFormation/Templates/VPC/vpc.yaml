@@ -37,6 +37,9 @@ Resources:
 
   InternetGateway:
     Type: AWS::EC2::InternetGateway
+    Tags:
+      - Key: Name
+        Value: !Join [ "-", [ "lws", !Ref EnvironmentName, !Ref RegionShortForm, !Ref ServiceName, "ig" ] ] #Custom naming convention    
     DependsOn: VPC
 
   AttachGateway:
@@ -53,7 +56,7 @@ Resources:
      SubnetId: !Ref PublicSubnetA
      Tags:
      - Key: Name
-       Value: !Sub NAT-${ServiceName}
+       Value: !Join [ "-", [ "lws", !Ref EnvironmentName, !Ref RegionShortForm, !Ref ServiceName, "ng" ] ] #Custom naming 
   ElasticIPAddress:
    Type: AWS::EC2::EIP
    Properties:
